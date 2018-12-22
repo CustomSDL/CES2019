@@ -1,0 +1,3 @@
+[submodule "sdl_qt_auto"]
+	path = sdl_qt_auto
+	url = https://github.com/LuxoftSDL/sdl_qt_auto
