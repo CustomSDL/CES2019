@@ -1,12 +1,12 @@
 formatVersion: 1
 formatType: am-application
 ---
-id:      'com.test.app'
+id:      'com.sdl.app'
 icon:    'icon.png'
 code:    'Main.qml'
 runtime: 'qml'
 name:
-  en: 'Browser'
+  en: 'SDL'
 
 runtimeParameters:
     arguments:

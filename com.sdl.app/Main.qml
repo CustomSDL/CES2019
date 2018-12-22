@@ -42,7 +42,7 @@ ApplicationCCWindow {
         y: exposedRect.y
         width: exposedRect.width
         height: exposedRect.height
-        url: "http://www.qt.io"
+        url: "file:///opt/neptune3/apps/sdl_hmi/index.html"
         webChannel: defaultWebChannel
     }
 }

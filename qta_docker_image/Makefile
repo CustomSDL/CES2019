@@ -1,5 +1,5 @@
 image_name := developer_qta:worker
-sdl_base_dir := ~/projects
+sdl_base_dir := ~/sdl
 qt_sdk_dir := /opt/qta
 
 build:
