@@ -1,3 +1,0 @@
-[submodule "python_websocket"]
-	path = python_websocket
-	url = https://github.com/Pithikos/python-websocket-server.git
