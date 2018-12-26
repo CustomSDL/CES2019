@@ -42,7 +42,7 @@ ApplicationCCWindow {
         y: exposedRect.y
         width: exposedRect.width
         height: exposedRect.height
-        url: "file:///opt/neptune3/apps/sdl_hmi/index.html"
+        url: "file:///opt/sdl/sdl_hmi/index.html"
         webChannel: defaultWebChannel
     }
 }
