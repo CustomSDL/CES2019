@@ -1,3 +1,6 @@
 [submodule "sdl_core"]
 	path = sdl_core
 	url = https://github.com/LuxoftSDL/sdl_qt_auto
+[submodule "sdl_hmi"]
+	path = sdl_hmi
+	url = https://github.com/LuxoftSDL/sdl_hmi_qt_auto
