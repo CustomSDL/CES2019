@@ -33,13 +33,80 @@ import application.windows 1.0
 import shared.Sizes 1.0
 import shared.Style 1.0
 import QtWebEngine 1.7
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import QtQuick.Layouts 1.3
 
 ApplicationCCWindow {
     id: root
 
-    WebEngineView {
-        x: exposedRect.x
+    function loadZoomFactor() {
+        var url = "file:///opt/neptune3/apps/com.sdl.app/config.json";
+        var configFile = new XMLHttpRequest();
+        configFile.onreadystatechange = function() {
+            if(configFile.readyState == 4 && configFile.status == 200) {
+                var jsonObject = JSON.parse(configFile.responseText);
+                if(jsonObject.propertyIsEnumerable("zoomFactor")) {
+                    hmiView.zoomFactor = jsonObject.zoomFactor;
+                    hmiSlider.value = hmiView.zoomFactor;
+                }
+            }
+        }
+        configFile.open("GET", url);
+        configFile.send();
+        return configValue;
+    }
+
+    function saveZoomFactor(value) {
+        var url = "file:///opt/neptune3/apps/com.sdl.app/config.json";
+        var json = {
+            "zoomFactor": value
+        };
+        var str = JSON.stringify(json);
+        var request = new XMLHttpRequest();
+        request.open("PUT", url, true);
+        request.send(str);
+    }
+
+    Component.onCompleted: {
+        loadZoomFactor()
+    }
+
+    ToolBar {
+        id:tools
+        width: exposedRect.width
+        background: null
         y: exposedRect.y
+        RowLayout {
+            spacing: Sizes.dp(10)
+            SwitchDelegate {
+                id: zoom
+                checked: false
+                onToggled: function() {
+                    hmiSlider.opacity = zoom.checked ? 1 : 0
+                    hmiSlider.enabled = zoom.checked
+                }
+            }
+            Slider {
+                id: hmiSlider
+                opacity: 0
+                enabled: false
+                from: 0
+                to: 2
+                value: 1
+                width: exposedRect.width
+                onValueChanged: {
+                    hmiView.zoomFactor = hmiSlider.value
+                    saveZoomFactor(hmiView.zoomFactor)
+                }
+            }
+        }
+    }
+
+    WebEngineView {
+        id: hmiView
+        x: exposedRect.x
+        y: tools.y + tools.height
         width: exposedRect.width
         height: exposedRect.height
         url: "file:///opt/sdl/sdl_hmi/index.html"
